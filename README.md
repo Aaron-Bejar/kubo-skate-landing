@@ -2,6 +2,10 @@
 
 Prototipo de landing page inspirado en la cultura skate, con un personaje 3D prerenderizado que sigue el movimiento del mouse. La animación utiliza una secuencia de imágenes WebP dibujadas en un canvas 2D, sin un motor 3D en tiempo real.
 
+## Demostración
+
+https://github.com/user-attachments/assets/ccd50896-5623-4f88-8853-0c6e043a061c
+
 ## Ejecución local
 
 Requisito: Node.js 20.19 o superior, o 22.12 o superior, compatible con Vite 8.
