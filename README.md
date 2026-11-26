@@ -1,53 +1,49 @@
-# KUBO Skate Co. — Interactive hero
+# KUBO Skate Co. — Hero interactivo
 
-A skate-inspired landing page prototype featuring a pre-rendered 3D character that follows the mouse. The animation uses a WebP image sequence rendered on a 2D canvas rather than a real-time 3D engine.
+Prototipo de landing page inspirado en la cultura skate, con un personaje 3D prerenderizado que sigue el movimiento del mouse. La animación utiliza una secuencia de imágenes WebP dibujadas en un canvas 2D, sin un motor 3D en tiempo real.
 
-## Getting started
+## Ejecución local
 
-Requires Node.js compatible with Vite 8 (Node.js 20.19+ or 22.12+).
+Requisito: Node.js 20.19 o superior, o 22.12 o superior, compatible con Vite 8.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Open the local URL printed in the terminal. Move the mouse across the hero to control the character, and select a skate style to change the displayed description.
+La aplicación estará disponible en la dirección local indicada en la terminal. El personaje responde al movimiento horizontal del mouse y el selector permite cambiar la descripción del estilo de skate.
 
 ```bash
-npm run lint     # Check source code
-npm run build    # Type-check and build to dist/
-npm run preview  # Preview the production build locally
+npm run lint     # Analizar el código
+npm run build    # Comprobar tipos y generar la versión de producción en dist/
+npm run preview  # Previsualizar la versión de producción localmente
 ```
 
-## How it works
+## Cómo funciona
 
-- Vite resolves the WebP frames in `src/assets/frames/` at build time.
-- `src/App.tsx` preloads the images and draws the selected frame on a canvas. Mouse position determines the target frame; interpolation smooths the transition.
-- Canvas edge slices extend the rendered scene across the viewport, with device pixel ratio capped for performance.
-- The style selector changes the displayed text; it does not change the character or product.
+- Vite resuelve los fotogramas WebP de `src/assets/frames/` durante la compilación.
+- `src/App.tsx` precarga las imágenes y dibuja el fotograma seleccionado en un canvas. La posición del mouse determina el fotograma de destino y una interpolación suaviza el movimiento.
+- El canvas extiende los bordes de la escena para cubrir la ventana y limita la densidad de píxeles para reducir el costo de renderizado.
+- El selector de estilos cambia el texto mostrado, pero no modifica el personaje ni el producto.
 
-The original technical notes are available in [guia_hero_interactivo_3d.md](guia_hero_interactivo_3d.md).
+Las notas técnicas originales están disponibles en [guia_hero_interactivo_3d.md](guia_hero_interactivo_3d.md).
 
-## Project structure
+## Estructura del proyecto
 
 ```text
 src/
-  App.tsx          Hero, animation and controls
-  global.css       Tailwind CSS entry point
-  assets/frames/   Pre-rendered WebP sequence
+  App.tsx          Hero, animación y controles
+  global.css       Punto de entrada de Tailwind CSS
+  assets/frames/   Secuencia de imágenes WebP prerenderizadas
 ```
 
-Built with React, TypeScript, Vite, Tailwind CSS and the Canvas API.
+Desarrollado con React, TypeScript, Vite, Tailwind CSS y la API de Canvas.
 
-## Current limitations and possible improvements
+## Limitaciones actuales y posibles mejoras
 
-- Load frames progressively and prioritize the initial frame to reduce initial network and memory usage.
-- Provide a static fallback and respect reduced-motion preferences; add a meaningful interaction for touch and keyboard users.
-- Connect the menu and “Explorar tablas” button to real destinations; add product and contact information when available.
-- Improve loading and image-error handling, and verify the layout and contrast on mobile devices.
-- Add automated interaction and accessibility tests, and measure real-world performance.
-- Replace demonstration product specifications with verified business information and confirm rights to the visual assets before commercial use.
-
-## Deployment
-
-Run `npm run build` and publish the generated `dist/` directory to a static hosting provider. For hosting under a subpath such as GitHub Pages for a project repository, configure Vite's `base` to match that subpath before building.
+- Cargar los fotogramas progresivamente y priorizar el inicial para reducir el consumo inicial de red y memoria.
+- Ofrecer una alternativa estática, respetar la preferencia de movimiento reducido y agregar una interacción adecuada para dispositivos táctiles y teclado.
+- Conectar el menú y el botón «Explorar tablas» con destinos reales; agregar información de productos y contacto cuando esté disponible.
+- Mejorar la gestión de carga y errores de imágenes, y verificar el diseño y el contraste en dispositivos móviles.
+- Agregar pruebas automatizadas de interacción y accesibilidad, y medir el rendimiento en condiciones reales.
+- Reemplazar las especificaciones de demostración por información verificada del negocio y confirmar los derechos de los recursos visuales antes de su uso comercial.
