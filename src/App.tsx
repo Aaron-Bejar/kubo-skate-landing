@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 
 // Cambia a `false` si tu secuencia empieza mirando a la IZQUIERDA y termina a la DERECHA
 const SECUENCIA_DE_DERECHA_A_IZQUIERDA = true;
@@ -22,6 +23,7 @@ const MODOS_SKATE = [
 ];
 
 export default function App() {
+  const reduceMotion = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -214,7 +216,12 @@ export default function App() {
         className="relative z-10 mx-auto flex h-screen max-w-[1440px] flex-col justify-between px-6 py-6 sm:px-10 sm:py-8"
       >
         {/* Barra Superior */}
-        <header className="relative z-20 flex items-center justify-between">
+        <motion.header
+          initial={reduceMotion ? false : { opacity: 0, y: -14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="relative z-20 flex items-center justify-between"
+        >
           <a href="#" className="flex items-center gap-2.5">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141414] text-xs font-bold tracking-tighter text-[#e2f85a]">
               KB
@@ -239,17 +246,27 @@ export default function App() {
               →
             </span>
           </button>
-        </header>
+        </motion.header>
 
         {/* Titular y Lemas Urbanos */}
         <div className="pointer-events-none relative z-10 my-auto grid h-full grid-cols-1 items-center lg:grid-cols-12">
           {/* Columna Izquierda */}
           <div className="lg:col-span-5">
-            <h1 className="text-5xl font-normal leading-[0.94] tracking-[-0.045em] sm:text-7xl xl:text-[5.25rem]">
+            <motion.h1
+              initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: reduceMotion ? 0 : 0.15, ease: "easeOut" }}
+              className="text-5xl font-normal leading-[0.94] tracking-[-0.045em] sm:text-7xl xl:text-[5.25rem]"
+            >
               <span className="block text-[#141414]/50">Nacidos en</span>
               <span className="block font-medium text-[#141414]">el concreto.</span>
-            </h1>
+            </motion.h1>
 
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
+            >
             <div
               className={`mt-8 hidden w-fit items-center gap-3 transition-all duration-300 lg:flex ${mirada === "izq" ? "scale-105 opacity-100" : "opacity-85"
                 }`}
@@ -268,13 +285,19 @@ export default function App() {
               <div className="h-[1px] w-20 border-t border-dashed border-[#141414]/45" />
               <span className="h-2 w-2 rounded-full bg-[#141414]" />
             </div>
+            </motion.div>
           </div>
 
           {/* Espacio Central para KUBO */}
           <div className="hidden lg:col-span-3 lg:block" />
 
           {/* Columna Derecha */}
-          <div className="hidden flex-col items-end gap-16 lg:col-span-4 lg:flex">
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
+            className="hidden flex-col items-end gap-16 lg:col-span-4 lg:flex"
+          >
             <div
               className={`flex items-center gap-3 transition-all duration-300 ${mirada === "der" ? "scale-105 opacity-100" : "opacity-85"
                 }`}
@@ -312,11 +335,16 @@ export default function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Barra Inferior */}
-        <footer className="relative z-20 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <motion.footer
+          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: reduceMotion ? 0 : 0.7, ease: "easeOut" }}
+          className="relative z-20 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"
+        >
           <div className="max-w-xs">
             <p className="text-xs font-medium leading-relaxed text-[#141414]/80">
               Tablas prensadas en frío, ejes de acero forjado y gráficos creados para dominar cada spot de la ciudad.
@@ -352,7 +380,7 @@ export default function App() {
           <div className="flex items-center gap-4 self-end font-mono text-xs text-[#141414]/70">
             <span className="font-semibold text-[#141414]">01 / 04</span>
           </div>
-        </footer>
+        </motion.footer>
       </section>
     </main>
   );
